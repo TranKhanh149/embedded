@@ -39,7 +39,7 @@ Core/Src/freertos.o: ../Core/Src/freertos.c \
  C:/Users/Kyuubi/STM32Cube/Repository/STM32Cube_FW_F1_V1.8.5/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h \
  ../Core/Inc/ds18b20.h ../Core/Inc/onewire.h ../Core/Inc/gpio.h \
  ../Core/Inc/main.h ../Core/Inc/TM1637.h ../Core/Inc/usart.h \
- ../Core/Inc/gpio.h
+ ../Core/Inc/gpio.h ../Core/Inc/UartRingbuffer.h
 C:/Users/Kyuubi/STM32Cube/Repository/STM32Cube_FW_F1_V1.8.5/Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h:
 ../Core/Inc/FreeRTOSConfig.h:
 C:/Users/Kyuubi/STM32Cube/Repository/STM32Cube_FW_F1_V1.8.5/Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h:
@@ -85,3 +85,4 @@ C:/Users/Kyuubi/STM32Cube/Repository/STM32Cube_FW_F1_V1.8.5/Middlewares/Third_Pa
 ../Core/Inc/TM1637.h:
 ../Core/Inc/usart.h:
 ../Core/Inc/gpio.h:
+../Core/Inc/UartRingbuffer.h:

@@ -36,7 +36,8 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  C:/Users/Kyuubi/STM32Cube/Repository/STM32Cube_FW_F1_V1.8.5/Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h \
  ../Core/Inc/dma.h ../Core/Inc/main.h ../Core/Inc/i2c.h ../Core/Inc/tim.h \
  ../Core/Inc/usart.h ../Core/Inc/gpio.h ../Core/Inc/TM1637.h \
- ../Core/Inc/ds18b20.h ../Core/Inc/onewire.h ../Core/Inc/gpio.h
+ ../Core/Inc/ds18b20.h ../Core/Inc/onewire.h ../Core/Inc/gpio.h \
+ ../Core/Inc/UartRingbuffer.h
 ../Core/Inc/main.h:
 C:/Users/Kyuubi/STM32Cube/Repository/STM32Cube_FW_F1_V1.8.5/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:
 ../Core/Inc/stm32f1xx_hal_conf.h:
@@ -83,3 +84,4 @@ C:/Users/Kyuubi/STM32Cube/Repository/STM32Cube_FW_F1_V1.8.5/Middlewares/Third_Pa
 ../Core/Inc/ds18b20.h:
 ../Core/Inc/onewire.h:
 ../Core/Inc/gpio.h:
+../Core/Inc/UartRingbuffer.h:

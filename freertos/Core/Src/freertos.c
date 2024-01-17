@@ -30,6 +30,8 @@
 #include "TM1637.h"
 #include "usart.h"
 #include "gpio.h"
+#include "string.h"
+#include "UartRingbuffer.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -38,11 +40,17 @@
   uint8_t logString[] = "to lam duoc";
   uint8_t displayData[4] = {0};
   uint8_t messageLength = 0;
-  extern char receivedMessage[50];
+  extern char receivedMessage[6];
   uint8_t receivedData;
   int i = 0;
+  int condition = 1;
   char string[64];
+  char message[6] = "ledddd";
+  char message2[] = "stop";
+  uint8_t uartRxBuffer[50];
+  char logMessage[] = "start?\n"; 
   extern Ds18b20Sensor_t ds18b20[_DS18B20_MAX_SENSORS];
+  char receivedString[4];
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
@@ -148,16 +156,28 @@ void MX_FREERTOS_Init(void) {
 void task1function(void *argument)
 {
   /* USER CODE BEGIN task1function */
+
   /* Infinite loop */
- for(;;)
- {
-	 HAL_UART_Transmit(&huart1, (uint8_t *)logString, sizeof(logString), 1000);
-	 osDelay(1000);
-  }
-  osDelay(1000);
+ for (;;) {
+    HAL_UART_Transmit(&huart1, (uint8_t *)"okelahhh\r\n", 8 , 100);
+    
+    if(receivedMessage[0] == 'l'){
+      HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_2);
+        osDelay(1000);
+    }
+    osDelay(1000);
+
+    // So sánh chuỗi và phát Semaphore nếu chuỗi bằng với một giá trị mong muốn
+//    if ( Wait_for(message)) {
+        //osSemaphoreRelease(SemaHandle);;
+//    }
+}
+      osDelay(1000);
 }
 
+
   /* USER CODE END task1function */
+
 
 /* USER CODE BEGIN Header_task2function */
 /**
@@ -170,14 +190,15 @@ void task2function(void *argument)
 {
   /* USER CODE BEGIN task2function */
   /* Infinite loop */
+	//HAL_UART_Transmit(&huart1, (uint8_t *)logMessage, 8 , 100);
 //  extern UART_HandleTypeDef huart1;
   for(;;)
   {
       DS18B20_ReadAll();
       DS18B20_StartAll();
-      osDelay(1000);
+
   }
-  osDelay(1000);
+  osDelay(100);
   /* USER CODE END task2function */
 }
 
@@ -191,6 +212,7 @@ void task2function(void *argument)
 void StartTask03(void *argument)
 {
   /* USER CODE BEGIN StartTask03 */
+	//HAL_UART_Transmit(&huart1, (uint8_t *)logMessage, 8 , 100);
   /* Infinite loop */
    for(;;)
   {
@@ -199,11 +221,11 @@ void StartTask03(void *argument)
       HAL_UART_Transmit(&huart1, (uint8_t *)string, sizeof(string), 100);
       tm1637_DisplayInteger(temperature);
       osDelay(1000);
-  // }
+   }
+   osDelay(1000);
+}
   /* USER CODE END StartTask03 */
-}
-osDelay(1000);
-}
+
 
 /* Private application code --------------------------------------------------*/
 /* USER CODE BEGIN Application */

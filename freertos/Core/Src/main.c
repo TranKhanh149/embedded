@@ -30,12 +30,13 @@
 #include "TM1637.h"
 #include "ds18b20.h"
 #include "stdio.h"
+#include "UartRingbuffer.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
 uint8_t data[20] = "\nbo cua uart";
-char receivedMessage[50];
+char receivedMessage[6];
 extern float temperature;
 
 /* USER CODE END PTD */
@@ -69,12 +70,20 @@ uint8_t	Timer1Enable = ENABLE;
 uint32_t Timer1  = 0;
 uint8_t CurrentDisplay[4] = {0};
 uint8_t tm1637_Segments[8] = {0};
+extern uartRxBuffer[];
+
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
+	if(huart->Instance == USART1)
+		HAL_UART_Transmit(&huart1, (uint8_t *)"okelahhh\r\n", 8 , 100);
+	HAL_UART_Receive_IT(&huart1, receivedMessage, 6);
+}
 /* USER CODE END 0 */
 
 /**
   * @brief  The application entry point.
   * @retval int
   */
+
 int main(void)
 {
   /* USER CODE BEGIN 1 */
@@ -114,12 +123,12 @@ int main(void)
   MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
   DS18B20_Init(DS18B20_Resolution_12bits);
-  HAL_UART_Receive_IT(&huart1, receivedMessage, 20);
+  HAL_UART_Receive_IT(&huart1, receivedMessage, 6);
   HAL_TIM_Base_Start_IT(&htim2);
-  Ringbuf_init ();
   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_2, 0);
   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_SET);
   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
+  
   /* USER CODE END 2 */
 
   /* Init scheduler */
